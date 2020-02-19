@@ -36,9 +36,9 @@ echo ">Author: $AUTHOR" >>README.md
 echo "" >>README.md
 echo ">Email: $EMAIL" >>README.md
 
-./gitbashCI.sh
-
 echo -e "\e[92mSUCCESS\e[39m: New Readme.md created"
 echo ""
+
+./gitbashCI.sh
 
 #EOF
