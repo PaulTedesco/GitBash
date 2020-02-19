@@ -2,7 +2,6 @@ clear
 
 if [[ ! -d .git ]]; then
   echo -e "\e[91mERROR\e[39m: It's not a git repository"
-  echo ""
   exit 1
 
 fi
@@ -17,7 +16,7 @@ echo "|  Version: 1.0                                           |"
 echo "|                                                         |"
 echo -e "\e[2m.=========================================================.\e[22m"
 echo ""
-
+PATH_SCRIPT=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 echo -n "Project Name: "
 read PROJECT_NAME
 
@@ -35,6 +34,6 @@ echo ">Email: $EMAIL" >>README.md
 echo -e "\e[92mSUCCESS\e[39m: New Readme.md created"
 echo ""
 
-./gitbashCI.sh
+$PATH_SCRIPT/gitbashCI.sh
 
 #EOF
