@@ -63,5 +63,3 @@ git push origin $BRANCH
 
 echo -e "\e[92mSUCCESS\e[39m: Commit push on branch $BRANCH with this message $COMMIT_MESSAGE"
 echo ""
-
-EOF
