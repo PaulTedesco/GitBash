@@ -30,33 +30,39 @@ if [[ ! -d .git ]]; then
     exit 1
   fi
 fi
-
+Waitingbranch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
 if [ -z $1 ]; then
   echo -e "\e[91mERROR\e[39m: No commit message."
   echo ""
   echo -n "Commit Message: "
   read COMMIT_MESSAGE
-  branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
 else
   COMMIT_MESSAGE=$1
 fi
 if [ -z $2 ]; then
-  BRANCH=$branch
+  BRANCH=$Waitingbranch
 else
   BRANCH=$2
 fi
-select item in "- Feature -" "- Fix -"; do
-  case $REPLY in
-  1)
-    type="feat"
-    break
-    ;;
-  2)
-    type="fix"
-    break
-    ;;
-  esac
-done
+if echo $Waitingbranch | grep -Eq '[w+\/w+]'; then
+  IFS='/'
+  read -ra Wbranch <<<"$Waitingbranch"
+  branch="${Wbranch[1]}"
+  type="${Wbranch[0]}"
+else
+  select item in "- Feature -" "- Fix -"; do
+    case $REPLY in
+    1)
+      type="feat"
+      break
+      ;;
+    2)
+      type="fix"
+      break
+      ;;
+    esac
+  done
+fi
 git add .
 git commit -m "$type($branch): $COMMIT_MESSAGE"
 git push origin $BRANCH
