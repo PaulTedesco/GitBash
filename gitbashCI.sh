@@ -62,6 +62,7 @@ else
       ;;
     esac
   done
+  branch=$Waitingbranch
 fi
 git add .
 git commit -m "$type($branch): $COMMIT_MESSAGE"
