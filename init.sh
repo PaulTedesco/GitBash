@@ -1,10 +1,4 @@
 clear
-
-if [[ ! -d .git ]]; then
-  echo -e "\e[91mERROR\e[39m: It's not a git repository"
-  exit 1
-
-fi
 echo ""
 echo -e "\e[2m.=========================================================.\e[22m"
 echo "|                                                         |"
@@ -16,7 +10,13 @@ echo "|  Version: 1.0                                           |"
 echo "|                                                         |"
 echo -e "\e[2m.=========================================================.\e[22m"
 echo ""
+echo "go to https://github.com/new or https://gitlab.com/projects/new and create new project"
+echo -n "What is the clone url like this https://gitlab.com/steodec/TEST.git or git@gitlab.com:steodec/TEST.git : "
+read REPO
 PATH_SCRIPT=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+git init
+git remote add origin $REPO
+
 echo -n "Project Name: "
 read PROJECT_NAME
 
@@ -33,7 +33,4 @@ echo ">Email: $EMAIL" >>README.md
 
 echo -e "\e[92mSUCCESS\e[39m: New Readme.md created"
 echo ""
-
-$PATH_SCRIPT/gitbashCI.sh
-
-#EOF
+exit 0
